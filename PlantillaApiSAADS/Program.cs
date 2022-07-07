@@ -1,4 +1,5 @@
 using PlantillaApiSAADS.Configuration;
+using PlantillaApiSAADS.Helpers;
 using PlantillaApiSAADS.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,7 @@ builder.Services.AddConfSwagger();
 //CONFIGURACION AUTH
 builder.Services.AddConfAuthentication(configuration);
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<UserJWT>();
 //CONFIGURACION DBCONTEX
 builder.Services.AddConfDbContextLog(configuration);
 //CONGURACION CORS
@@ -33,6 +35,7 @@ builder.Services.AddConfRepositorioHTTP(configuration);
 
 var app = builder.Build();
 
+app.UseCors();
 // Configure the HTTP request pipeline.
 
 if (app.Environment.IsDevelopment())
