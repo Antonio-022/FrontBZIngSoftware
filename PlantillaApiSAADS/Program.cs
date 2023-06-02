@@ -19,12 +19,21 @@ options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoop
 builder.Services.AddAutoMapper(typeof(Program));
 //CONFIGURACION SWAGGER
 builder.Services.AddConfSwagger();
+
+builder.Services.AddControllers().AddNewtonsoftJson(option => {
+    option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+    option.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+    option.SerializerSettings.DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore;
+    option.SerializerSettings.ContractResolver = new EmptyCollectionContractResolver();
+})
+.AddJsonOptions(option => option.JsonSerializerOptions.PropertyNamingPolicy = null);
 //CONFIGURACION AUTH
 builder.Services.AddConfAuthentication(configuration);
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<UserJWT>();
 //CONFIGURACION DBCONTEX
 builder.Services.AddConfDbContextLog(configuration);
+builder.Services.AddConfDbContext(configuration);
 //CONGURACION CORS
 builder.Services.AddconfCors();
 //builder.Services.AddConfDbContextSAADS(configuration);

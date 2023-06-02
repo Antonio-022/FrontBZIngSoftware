@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PlantillaApiSAADS.DTOs;
+using PlantillaApiSAADS.Models.RNDS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +12,11 @@ namespace PlantillaApiSAADS.Helpers
     {
         public AutoMapperProfiles()
         {
-
-            //CreateMap<MateriaContenido, MateriaContenidoDTO>()
-            //    .ForMember(x => x.EstadoNombre, x => x.MapFrom(y => y.IdEstadoNavigation != null ? y.IdEstadoNavigation.Nombre : ""))
-            //    .ForMember(x => x.ModeloEstudioNombre, x => x.MapFrom(y => y.IdModeloEstudioNavigation != null ? y.IdModeloEstudioNavigation.Nombre : ""))
-            //      .ForMember(x => x.GrupoAcademicoNombre, x => x.MapFrom(y => y.GrupoAcademico != null ? y.GrupoAcademico.Nombre : ""))
-            //    .ReverseMap();
-
-
-
-
+            CreateMap<jugadorDTO, Jugador>().ReverseMap();
+            CreateMap<EquipoDTO, Equipo>().ReverseMap();
+            CreateMap<PerosnaWithJugador, Jugador>().ReverseMap();
+            CreateMap<personaADD, Jugador>().ReverseMap();
+            CreateMap<personaDTO, Persona>().ReverseMap();
         }
     }
 }
